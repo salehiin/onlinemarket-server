@@ -31,20 +31,18 @@ async function run() {
     await client.connect();
 
     // Brought from readme.md
-    // const productCollection = client.db('onlineMarket').collection('products');
+    const productCollection = client.db('onlineMarket').collection('products');
 
-    // app.get('/products', async(req, res) => {
-    //     console.log(req.query);
-
-    //     const result = await productCollection.find().toArray();
-    //     res.send(result);
-    // })
+    app.get('/products', async(req, res) => {
+        const result = await productCollection.find().toArray();
+        res.send(result);
+    })
 
     // edit by watching video
-    // app.get('/totalProducts', async(req, res) =>{
-    //     const result = await productCollection.estimatedDocumentCount();
-    //     res.send({totalProducts: result})
-    // })
+    app.get('/totalProducts', async(req, res) =>{
+        const result = await productCollection.estimatedDocumentCount();
+        res.send({totalProducts: result})
+    })
 
     // edit by watching video
     // app.post('/productsByIds', async(req, res) =>{
@@ -61,7 +59,7 @@ async function run() {
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
     // Ensures that the client will close when you finish/error
-    await client.close();
+    // await client.close();
   }
 }
 run().catch(console.dir);
